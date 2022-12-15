@@ -3,7 +3,7 @@
   "description": "recaptcha",
   "identifier": "recaptcha",
   "title": "recaptcha",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "type": "captcha",
   "argument": [],
   "authors": [
@@ -12,6 +12,6 @@
       "email": "moritz.walter@the-systems.eu"
     }
   ],
-  "minimumCoreVersion": "35",
-  "module_id": 1
+  "minimumCoreVersion": "56",
+  "module_id": 28
 }
