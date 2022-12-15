@@ -1,0 +1,17 @@
+{
+  "name": "recaptcha",
+  "description": "recaptcha",
+  "identifier": "recaptcha",
+  "title": "recaptcha",
+  "version": "1.0.0",
+  "type": "captcha",
+  "argument": [],
+  "authors": [
+    {
+      "name": "Moritz Walter",
+      "email": "moritz.walter@the-systems.eu"
+    }
+  ],
+  "minimumCoreVersion": "35",
+  "module_id": 1
+}
