@@ -6,9 +6,9 @@ use hmcsw\service\config\ConfigService;
 use hmcsw\service\templates\AssetsService;
 use hmcsw\service\templates\LanguageService;
 use hmcsw\service\authorization\SessionService;
-use hmcsw\service\module\moduleCaptchaRepository;
+use hmcsw\service\module\ModuleCaptchaRepository;
 
-class recaptcha implements moduleCaptchaRepository
+class recaptcha implements ModuleCaptchaRepository
 {
 
   private array $config;
