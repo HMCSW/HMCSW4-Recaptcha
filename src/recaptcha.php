@@ -25,27 +25,26 @@ class recaptcha implements ModuleCaptchaRepository
 
     AssetsService::addJS("
       <script type='text/javascript' xmlns='http://www.w3.org/1999/html'>
-        const mode = '" . $nightMode . "';
-        
-        var theme;
-        if(mode === 'true'){
-          theme = 'dark';
-        } else if (mode === 'false' ){
-          theme = 'light';
-        } else if (mode === 'device' ){
+        const recaptchaMode = '" . $nightMode . "';
+         
+        var recaptchaTheme;
+        if(recaptchaMode === 'true'){
+          recaptchaTheme = 'dark';
+        } else if (recaptchaMode === 'false' ){
+          recaptchaTheme = 'light';
+        } else if (recaptchaMode === 'device' ){
           if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            theme = 'dark';
+            recaptchaTheme = 'dark';
           } else {
-            theme = 'light';
+            recaptchaTheme = 'light';
           }
         } else {
-          theme = 'light';
+          recaptchaTheme = 'light';
         }
-        console.log(theme);
           var onloadCallback = function() {
               grecaptcha.render('recaptcha', {
                   'sitekey' : '" . $this->getConfig()['key']['public'] . "',
-                  'theme' : theme,
+                  'theme' : recaptchaTheme,
                   'lang' : '" . $language . "',
               });
           };
