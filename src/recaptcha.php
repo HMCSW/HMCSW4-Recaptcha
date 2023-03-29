@@ -2,11 +2,11 @@
 
 namespace hmcswModule\recaptcha\src;
 
-use hmcsw\service\config\ConfigService;
-use hmcsw\service\templates\AssetsService;
-use hmcsw\service\templates\LanguageService;
+use hmcsw\exception\ValidationException;
 use hmcsw\service\authorization\SessionService;
 use hmcsw\service\module\ModuleCaptchaRepository;
+use hmcsw\service\templates\AssetsService;
+use hmcsw\service\templates\LanguageService;
 
 class recaptcha implements ModuleCaptchaRepository
 {
@@ -63,7 +63,10 @@ class recaptcha implements ModuleCaptchaRepository
     return $this->config;
   }
 
-  public function validCaptcha ($response): array
+  /**
+   * @throws ValidationException
+   */
+  public function validCaptcha ($response): void
   {
     $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . $this->getConfig()['key']['secret'] . '&response=' . urlencode($response);
 
@@ -71,14 +74,12 @@ class recaptcha implements ModuleCaptchaRepository
     curl_setopt_array($curl, [CURLOPT_URL => $url, CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1, CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4, CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => true, CURLOPT_MAXREDIRS => 1, CURLOPT_TIMEOUT => 5,]);
     $response = curl_exec($curl);
     if ($response === false) {
-      return ["success" => false, "response" => "request error"];
+      throw new ValidationException("Captcha failed", 400);
     }
     $response = json_decode($response, true);
 
-    if ($response["success"]) {
-      return ["success" => true, "response" => []];
-    } else {
-      return ["success" => false, "response" => ["error_code" => 400, "error_message" => "failed", "error_response" => $response]];
+    if (!$response["success"]) {
+      throw new ValidationException("Captcha failed", 400);
     }
   }
 
