@@ -52,7 +52,7 @@ class recaptcha implements ModuleCaptchaRepository
     ");
 
     AssetsService::addJS("
-      <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&hl=" . $language . "
+      <script src='https://www.recaptcha.net/recaptcha/api.js?onload=onloadCallback&hl=" . $language . "
               async defer'>
       </script>
       ");
