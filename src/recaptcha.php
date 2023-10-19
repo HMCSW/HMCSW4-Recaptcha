@@ -25,14 +25,14 @@ class recaptcha implements ModuleCaptchaRepository
 
     AssetsService::addJS("
       <script type='text/javascript' xmlns='http://www.w3.org/1999/html'>
-        const recaptchaMode = '" . $nightMode . "';
+        const recaptchaMode = '" . $nightMode->value . "';
          
         var recaptchaTheme;
-        if(recaptchaMode === 'true'){
+        if(recaptchaMode === 'on'){
           recaptchaTheme = 'dark';
-        } else if (recaptchaMode === 'false' ){
+        } else if (recaptchaMode === 'of' ){
           recaptchaTheme = 'light';
-        } else if (recaptchaMode === 'device' ){
+        } else if (recaptchaMode === 'system' ){
           if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             recaptchaTheme = 'dark';
           } else {
